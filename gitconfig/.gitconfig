@@ -1,0 +1,20 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://hamgit.ir"]
+	username = arman hashempour
+	helper = "!f() { echo "username=arman hashempour"; echo "password=$HAMGIT_PAT"; };f"
+[user]
+	email = arman.hmpr@gmail.com
+	name = its-kaktos
+[rerere]
+	enabled = true
+[init]
+	defaultBranch = main
+[alias]
+	logshort = log --oneline --graph --decorate
+[pull]
+	rebase = true

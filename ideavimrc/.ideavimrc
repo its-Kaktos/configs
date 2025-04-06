@@ -1,0 +1,172 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+" Start: Config your intellij:
+"
+" Install Intellij plugins:
+" - IdeaVim
+" - AceJump
+" - Inspection Lens
+" - IdeaVim-EasyMotion
+" - IdeaVim-Quickscope
+" - IdeaVimExtension
+"
+" In File -> Settings -> Advance Settings -> set "Left margin in distraction free mode" to 0
+"
+" End: Config your Intellij
+
+" Move to next tab "gt" or alt + n, move to previous tab "gT" or alt + p
+
+
+
+let mapleader = " "
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=8
+
+
+" Do incremental searching.
+set incsearch
+set ignorecase
+set smartcase
+set nohlsearch
+set relativenumber
+set number
+set showmode
+set showcmd
+set visualbell
+" Share IdeaVim and system clipboard
+set clipboard+=unnamedplus
+
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+map \d <Action>(Debug)
+
+map \b <Action>(ToggleLineBreakpoint)
+
+set NERDTree
+let g:NEERDTreeMapActivateNode='l'
+let g:NEERDTreeMapJumpParent='h'
+
+Plug 'machakann/vim-highlightedyank'
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+
+map <C-c> <Esc>
+
+""" Terminal
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>t :action Terminal.OpenInTerminal<CR>
+
+""" Navigation
+nnoremap <c-\> :action SplitVertically<CR>
+nnoremap <c--> :action SplitHorizontally<CR>
+nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+" Tab navigation
+nnoremap <A-n> :tabnext<CR>
+nnoremap <A-p> :tabprev<CR>\
+
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+" Pane navigation
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+" Resize panes
+nmap <C-Down> <Action>(StretchSplitToBottom)
+nmap <C-Left> <Action>(StretchSplitToLeft)
+nmap <C-Right> <Action>(StretchSplitToRight)
+nmap <C-Up> <Action>(StretchSplitToTop)
+
+" nnoremap <c-p> :action FindInPath<CR>
+nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+nnoremap <c-x> :action HideAllWindows<CR>
+nnoremap <c-s> :action FileStructurePopup<CR>
+nnoremap <c-g> :action Generate<CR>
+noremap <leader>e :action QuickEvaluateExpression<CR>
+
+map <leader>s <Action>(SelectInProjectView)
+map <leader>c <Action>(Stop)
+set ideajoin
+
+" delete without yanking
+noremap <leader>d "_d
+noremap c "_c
+noremap C "_C
+noremap s "_s
+noremap S "_S
+
+" Jump between methods
+nnoremap [[ <Action>(MethodUp)
+nnoremap ]] <Action>(MethodDown)
+
+""" Move lines up and down when in select mode
+vnoremap K :m '<-2<CR>gv=gv"z
+vnoremap J :m '>+1<CR>gv=gv"z
+
+""" continuous shift
+xnoremap < <gv
+xnoremap > >gv
+
+""" gotos
+nmap gd :action GotoDeclaration<CR>
+nmap gi :action GotoImplementation<CR>
+nmap gn :action GotoNavBar<CR>
+nmap gu :action FindUsages<CR>
+nmap gf <Action>(Back)
+nmap gb <Action>(Forward)
+
+""" LSP
+nnoremap <leader>la :action ShowIntentionActions<CR>
+
+""" Diagnostics
+nnoremap <leader>ll :action ShowErrorDescription<CR>
+
+""" Refactoring
+nnoremap <leader>r :action Refactoring.QuickListPopupAction<CR>
+nnoremap <leader>rn :action RenameElement<CR>
+
+""" Easy motions
+Plug 'easymotion/vim-easymotion'
+map <leader>ff <Plug>(easymotion-f)
+map <leader>FF <Plug>(easymotion-s)
+
+""" Show error
+map <c-x> <Action>(ShowErrorDescription)
+
+" Show quick documentation (Works on all Jetbrains IDEs)
+" map <leader>q :action QuickJavaDoc<CR>
+map <leader>q :action ShowHoverInfo<CR>
+
+" Folding
+map <leader>zc :action CollapseAllRegions<CR>
+map <leader>zo :action ExpandAllRegions<CR>
+
+" File navigation
+map <leader>fr <action>(RecentFiles)
+map <leader>fl <action>(RecentLocations)
