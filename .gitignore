@@ -398,3 +398,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+copyq/.config/copyq/copyq_geometry.ini
+copyq/.config/copyq/copyq_tab*
+copyq/.config/copyq/copyq.lock
+vlc/.config/vlc/vlc-qt-interface.conf
+ohmyzsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions
