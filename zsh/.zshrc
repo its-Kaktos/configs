@@ -114,3 +114,5 @@ source <(fzf --zsh)
 
 # sourec (load) env
 [ -f ~/.zsh_env ] && source ~/.zsh_env
+
+export XDG_DATA_HOME=/usr/share/:/usr/local/share
