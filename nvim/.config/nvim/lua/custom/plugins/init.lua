@@ -2,16 +2,4 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {
-  {
-    'mbbill/undotree',
-    keys = {
-      {
-        '<leader>u',
-        ':UndotreeShow<CR>',
-        desc = 'Open UndoTree',
-        silent = true,
-      },
-    },
-  },
-}
+return {}

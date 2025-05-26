@@ -418,3 +418,6 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip
 
 # alternative for KDE Wallet
 exec --no-startup-id eval $(gnome-keyring-daemon --start --components=secrets)
+
+# Volume control
+exec --no-startup-id pasystray

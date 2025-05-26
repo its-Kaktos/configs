@@ -118,3 +118,4 @@ source <(fzf --zsh)
 export XDG_DATA_HOME="$HOME/.local/share"
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 
+alias vim="nvim"
