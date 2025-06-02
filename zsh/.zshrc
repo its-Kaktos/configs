@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export VISUAL=/usr/bin/vim
+export VISUAL=/usr/bin/nvim
 export PATH=$PATH:$HOME/go/bin
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
