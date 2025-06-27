@@ -170,7 +170,19 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+                nilness = true,
+                unusedwrite = true,
+              },
+              staticcheck = true,
+              diagnosticsDelay = '500ms',
+            },
+          },
+        },
         -- clangd = {},
         -- pyright = {},
         -- rust_analyzer = {},

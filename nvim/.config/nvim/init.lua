@@ -23,6 +23,7 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -72,6 +73,17 @@ vim.o.confirm = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Toggle hlsearch if it's on, otherwise just do "enter"
+vim.keymap.set('n', '<CR>', function()
+  ---@diagnostic disable-next-line: undefined-field
+  if vim.v.hlsearch == 1 then
+    vim.cmd.nohl()
+    return ''
+  else
+    return vim.keycode '<CR>'
+  end
+end, { expr = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -183,7 +195,6 @@ require('lazy').setup({
       },
     },
   },
-
 
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
@@ -311,3 +322,38 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
+
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", {
+  desc = 'Move selected line down',
+})
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", {
+  desc = 'Move selected line up',
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', {
+  desc = 'Delete in the blackhole register',
+})
+
+-- tmux-navigator keymaps
+vim.keymap.set('n', '<C-h>', '<Cmd>NvimTmuxNavigateLeft<CR>', { silent = true, desc = 'Go to the left window' })
+vim.keymap.set('n', '<C-j>', '<Cmd>NvimTmuxNavigateDown<CR>', { silent = true, desc = 'Go to the down window' })
+vim.keymap.set('n', '<C-k>', '<Cmd>NvimTmuxNavigateUp<CR>', { silent = true, desc = 'Go to the up window' })
+vim.keymap.set('n', '<C-l>', '<Cmd>NvimTmuxNavigateRight<CR>', { silent = true, desc = 'Go to the right window' })
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.opt.scrolloff = 0
+    vim.bo.filetype = 'terminal'
+  end,
+})
+
+vim.keymap.set('n', '<leader>ts', function()
+  vim.cmd.vnew() -- Open a new vertical window
+  vim.cmd.wincmd 'J' -- moves the new terminal window all the way to the bottom
+  vim.api.nvim_win_set_height(0, 15) -- sets the height of the window, obviously.
+  vim.wo.winfixheight = true -- Prevent the height from being changed
+  vim.cmd.term() -- opens terminal
+end, { desc = 'Open [t]erminal [s]mall window' })

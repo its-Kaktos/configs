@@ -406,3 +406,4 @@ copyq/.config/copyq/copyq.pub
 vlc/.config/vlc/vlc-qt-interface.conf
 ohmyzsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 ohmyzsh/.oh-my-zsh/cache
+tmux/.tmux/plugins/
