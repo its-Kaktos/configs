@@ -17,6 +17,7 @@ vim.o.showmode = false
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -60,7 +61,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 5
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -343,9 +344,9 @@ vim.keymap.set('n', '<C-l>', '<Cmd>NvimTmuxNavigateRight<CR>', { silent = true, 
 vim.api.nvim_create_autocmd('TermOpen', {
   group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
   callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.opt.scrolloff = 0
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    vim.wo.scrolloff = 0
     vim.bo.filetype = 'terminal'
   end,
 })
@@ -357,3 +358,26 @@ vim.keymap.set('n', '<leader>ts', function()
   vim.wo.winfixheight = true -- Prevent the height from being changed
   vim.cmd.term() -- opens terminal
 end, { desc = 'Open [t]erminal [s]mall window' })
+
+vim.keymap.set('n', '<leader>td', function()
+  local filename = vim.api.nvim_buf_get_name(0)
+  local dir = vim.fn.fnamemodify(filename, ':p:h')
+  print(dir)
+end, { desc = 'Open [t]erminal small window and change [d]irectory to buffer directory' })
+
+vim.opt.colorcolumn = '120'
+
+vim.keymap.set('n', '-', '<C-w>-', { desc = 'Decrease window height' })
+vim.keymap.set('n', '+', '<C-w>+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<M-l>', '<Cmd>vertical resize +5<CR>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<M-h>', '<Cmd>vertical resize -5<CR>', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<leader>tt', '<Cmd>tab split<CR>', { desc = 'Open window in a new tab' })
+
+vim.keymap.set('n', 'x', '"_x', { desc = 'Delete character without copying' })
+
+-- Enable terminal bidirectional text support
+vim.o.termbidi = true
+-- Set encoding to UTF-8
+vim.o.encoding = 'utf-8'
+-- Set file encoding to UTF-8
+--vim.o.fileencoding = 'utf-8'
